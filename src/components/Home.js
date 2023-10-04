@@ -1,34 +1,55 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Home() {
-  const [postData, setPostData] = useState([]);
-  const apikey = "AIzaSyBlDkNTgDiEeK-ah-TC9k2TaS6VGQL396g";
-  const API_URL = `https://www.googleapis.com/blogger/v3/blogs/2399953/posts?key=${apikey}`;
+export default function Home    () {
+  const [foodData, setFoodData] = useState([]);
+
+  const url =
+    'localhost:4000';
+  
 
   useEffect(() => {
-    fetch(API_URL)
-      .then(response => response.json())
-      .then(data => {
-        const posts = data.items;
-        if (posts.length !== 0) {
-          setPostData(posts);
-        } else {
-          console.log("No blogs found.");
-        }
+    fetch(url +'/api/blogs')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
       })
-      .catch(error => console.log(error));
-  }, []);
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 
-  if (postData.length === 0) {
+  if (!foodData.length) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="container mx-auto py-8">
-      {postData.map(post => (
-        <div className="bg-white rounded-lg shadow-lg p-4 mb-4" key={post.id}>
-          <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    <div className="flex flex-row flex-wrap ">
+      {foodData.map((foodItem) => (
+        <div key={foodItem.foodId} className="bg-gray-100 p-4 rounded-md shadow-md basis-1/3">
+          <h1 className="text-2xl font-bold mb-4">{foodItem.label}</h1>
+          <div className="flex justify-evenly items-center mb-4">
+            <div className="flex-1">
+              <p className="font-semibold">Calories:</p>
+              <p>{foodItem.nutrients.ENERC_KCAL} kcal</p>
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold">Protein:</p>
+              <p>{foodItem.nutrients.PROCNT} g</p>
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold">Fat:</p>
+              <p>{foodItem.nutrients.FAT} g</p>
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold">Carbohydrates:</p>
+              <p>{foodItem.nutrients.CHOCDF} g</p>
+            </div>
+          </div>
+          <img
+            src={foodItem.image}
+            alt={"https://static.toiimg.com/thumb/msid-70660524,imgsize-1204032,width-400,resizemode-4/70660524.jpg"}
+            className="max-w-full h-auto rounded-md"
+          />
         </div>
       ))}
     </div>
