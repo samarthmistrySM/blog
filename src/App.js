@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Navigationbar/>
 
-      <div className="container p-10" >
+      <div className="container py-[70px]" >
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />
