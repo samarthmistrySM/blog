@@ -33,10 +33,10 @@ export default function Services() {
   }
 
   return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-center">
+      <div className="m-3 mb-0 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between">
         {BlogData.map((blogs) => (
           <div
-            className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700"
           >
             <img
               className="w-full h-40 object-cover rounded-t-lg"
@@ -57,6 +57,7 @@ export default function Services() {
                 Read more
               </a>
             </div>
+            
           </div>
         ))}
       </div>

@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Navigationbar/>
 
-      <div className="container pt-[69px]" >
+      <div className="container pt-[69px] dark:bg-gray-800 bg-gray-400" >
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />

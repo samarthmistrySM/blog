@@ -17,7 +17,7 @@ code {
     monospace;
 }
 
-a.active{
+a.active,.dark a.active{
   color:rgb(29, 78, 216)
 }
 

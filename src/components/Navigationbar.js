@@ -1,9 +1,26 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from "react";
 // import image from '../logo.png'
-
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 export default function Navigationbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const HandlethemeSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <div>
@@ -15,23 +32,26 @@ export default function Navigationbar() {
               Blogbites
             </span>
           </NavLink>
-          <div className="flex md:order-2">
+          <div className="md:hidden">
             <button
               type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={toggleMenu}
+              className="text-gray-900 bg-gray-400 hover:bg-gray-300  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-700"
             >
-              Post Your Blog
+              {isMenuOpen ? "Close" : "Menu"}
             </button>
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className={`${
+              isMenuOpen ? "block" : "hidden"
+            } md:flex md:w-auto md:order-1`}
             id="navbar-sticky"
           >
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
                 <NavLink
-                  to="/"  
-                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0 text-white`}
+                  to="/"
+                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0 dark:text-white`}
                 >
                   Home
                 </NavLink>
@@ -39,7 +59,7 @@ export default function Navigationbar() {
               <li>
                 <NavLink
                   to="/about"
-                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0  text-white`}
+                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0  dark:text-white`}
                 >
                   About
                 </NavLink>
@@ -47,19 +67,38 @@ export default function Navigationbar() {
               <li>
                 <NavLink
                   to="/services"
-                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0  text-white`}
+                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0  dark:text-white`}
                 >
                   Services
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/contact" 
-                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0 text-white`}
+                  to="/contact"
+                  className={`block py-2 pl-3 pr-4  md:hover:text-blue-700 md:p-0 dark:text-white`}
                 >
                   Contact
                 </NavLink>
               </li>
+              <li>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" value="" class="sr-only peer" onClick={HandlethemeSwitch}/>
+                  <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                  <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    {theme === 'light'?'Dark Mode':'Light Mode'}
+                  </span>
+                </label>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className="text-gray-900 bg-gray-400 hover:bg-gray-300  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+                >
+                  {" "}
+                  Post Your Blog
+                </button>
+              </li>
+             
             </ul>
           </div>
         </div>
