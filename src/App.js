@@ -5,6 +5,7 @@ import Navigationbar from './components/Navigationbar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Services from './components/Services';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
     <Router>
       <Navigationbar/>
 
-      <div className="container py-[70px]" >
+      <div className="container pt-[69px]" >
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />
@@ -20,6 +21,7 @@ function App() {
         <Route path='/contact' element={<Contact/>} />
       </Routes>
       </div>
+      <Footer/>
     </Router>
     </>
   );
