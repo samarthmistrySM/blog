@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
 import gsap from "gsap";
+import Card from "./Card";
+import Modal from './Modal';
 
 export default function Services() {
-  const [BlogData, setBlogData] = useState([]);
+    const [BlogData, setBlogData] = useState([]);
+    const [readMode, setReadMode] = useState(false);
+    const [readData, setReadData] = useState({})
+  const [isModalOpen, setIsModalOpen] = useState(false); // Add modal state
+  const [selectedBlog, setSelectedBlog] = useState({});
+
+
+  const handleReadMoreClick = (blog) => {
+    setSelectedBlog(blog);
+    setIsModalOpen(true);
+  };
+
 
   const url = "http://localhost:4000";
 
@@ -18,7 +31,6 @@ export default function Services() {
   }, []);
 
   useEffect(() => {
-    // GSAP Animation
     gsap.from(".blog-card", {
       opacity: 0,
       y: -20,
@@ -35,50 +47,25 @@ export default function Services() {
     });
   }, [BlogData]);
 
-  if (!BlogData.length) {
-    return <div>Loading...</div>;
-  }
-
-  function ShortenText(text) {
-    const words = text.split(" ");
-
-    if (words.length > 15) {
-      const trimmedWords = words.slice(0, 15);
-      const trimmedText = trimmedWords.join(" ") + "...";
-      return trimmedText;
-    }
-
-    return text;
-  }
-
   return (
-    <div className="m-3 mt-[69px] mb-0 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-between">
+    <>
+    <div className="m-10 mt-[69px] mb-0 grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 justify-between">
       {BlogData.map((blogs, index) => (
-        <div
-          className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700 blog-card"
+        <Card
+          blogs={blogs}
+          setReadData={setReadData}
+          setReadMode={setReadMode}
           key={index}
-        >
-          <img
-            className="w-full h-40 object-cover rounded-t-lg"
-            src={blogs.image}
-            alt={blogs.image}
-          />
-          <div className="p-3">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {blogs.title}
-            </h5>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              {ShortenText(blogs.content)}
-            </p>
-            <a
-              href="/"
-              className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Read more
-            </a>
-          </div>
-        </div>
+          onReadMoreClick={() => handleReadMoreClick(blogs)}
+        />
       ))}
-    </div>
+</div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        blog={selectedBlog}
+      />
+    </>
   );
 }
