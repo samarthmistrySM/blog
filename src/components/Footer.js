@@ -4,13 +4,14 @@ export default function Footer() {
   return (
     <>
     
-<footer className="bg-white dark:bg-gray-900">
+<footer className=" bg-white dark:bg-gray-900">
     <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
               <a href="/" className="flex items-center">
                   <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Blogbites</span>
               </a>
+          <div className='mt-5 w-3/4 text-gray-500 dark:text-gray-400 font-medium'>Through the pages of a blog, we embark on a journey of words, where each sentence is a step closer to understanding, and each paragraph reveals a new perspective.</div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
