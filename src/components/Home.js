@@ -25,7 +25,7 @@ export default function Home() {
       </div>
       <div className="px-9 h-screen page2 w-full flex justify-center items-center text-center bg-lime-500">
         <div className="textz">
-          <h1 className="text-5xl font-light text-start mb-6">Know your audience</h1>
+          <h1 className="text-5xl font-light text-start mb-6 ">Know your audience</h1>
           <h3 className="w-3/4 text-xl text-start">
             Find out which posts are a hit with Blogger’s built-in analytics. You’ll see where your
             audience is coming from and what they’re interested in. You can even connect your blog
@@ -33,7 +33,7 @@ export default function Home() {
           </h3>
         </div>
         <img
-          className="rounded-2xl"
+          className="rounded-2xl hidden lg:flex lg:w-6/12 xl:w-4/12 "
           src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZ3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60"
           alt="images"
         />
