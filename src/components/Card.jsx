@@ -1,13 +1,9 @@
 import React from "react";
 
-const Card = ({ blogs, index, setReadData, setReadMode, onReadMoreClick }) => {
-  const handleCLick = () => {
-    setReadMode(true);
-    setReadData(() => blogs._id);
-    console.log("blog clicked");
-  };
+const Card = ({ blogs, index,  onReadMoreClick,handleClick }) => {
+  
   function truncate(str) {
-    return str.length > 15 ? str.substring(0, 15) + "..." : str;
+    return str.split(" ").slice(0, 15).join(" ")+"...";
   }
   return (
     <div
@@ -28,8 +24,8 @@ const Card = ({ blogs, index, setReadData, setReadMode, onReadMoreClick }) => {
         </p>
         <button
           onClick={() => {
-            handleCLick();
-            onReadMoreClick(); // Call the function to open the modal
+            handleClick();
+            onReadMoreClick(); 
           }}
           className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >

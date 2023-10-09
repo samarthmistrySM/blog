@@ -4,10 +4,8 @@ import Card from "./Card";
 import Modal from './Modal';
 
 export default function Services() {
-    const [BlogData, setBlogData] = useState([]);
-    const [readMode, setReadMode] = useState(false);
-    const [readData, setReadData] = useState({})
-  const [isModalOpen, setIsModalOpen] = useState(false); // Add modal state
+  const [BlogData, setBlogData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const [selectedBlog, setSelectedBlog] = useState({});
 
 
@@ -41,7 +39,7 @@ export default function Services() {
     gsap.to(".blog-card", {
       opacity: 1,
       y: 0,
-      stagger: 0.2, 
+      stagger: 0.2,
       duration: 1,
       ease: "power3.inOut",
     });
@@ -53,15 +51,15 @@ export default function Services() {
       {BlogData.map((blogs, index) => (
         <Card
           blogs={blogs}
-          setReadData={setReadData}
-          setReadMode={setReadMode}
           key={index}
+          handleClick = {()=>{}}
           onReadMoreClick={() => handleReadMoreClick(blogs)}
         />
       ))}
 </div>
 
       <Modal
+        
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         blog={selectedBlog}
