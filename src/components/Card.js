@@ -5,6 +5,7 @@ const Card = ({ blogs, index,  onReadMoreClick,handleClick }) => {
   function truncate(str) {
     return str.split(" ").slice(0, 15).join(" ")+"...";
   }
+  
   return (
     <div
       className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700 blog-card"

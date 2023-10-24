@@ -4,12 +4,13 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 
 const Blog = require("./models/Blog");
+const Contact = require("./models/Contact");
 
 const app = express();
 const port = 4000;
 
 app.use(morgan("tiny"));
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 mongoose
@@ -34,24 +35,29 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("The Api is not working.....");
+});
 
-app.get('/', (req, res) => {
-    res.send('The Api is not working.....');
-})
-
-app.get('/api/blogs', (req, res) => {
-    Blog.find({})
+app.get("/api/blogs", (req, res) => {
+  Blog.find({})
     .then((blogs) => {
-        res.json(blogs);
-      })
+      res.json(blogs);
+    })
     .catch((err) => {
-        res.json(err);
-      });
-})
+      res.json(err);
+    });
+});
 
-
-
+app.post("/api/contact", (req, res) => {
+  console.log(req.body);
+  try {
+    Contact.create(req.body);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 app.listen(port, () => {
-    console.log("Server is running on port ",port);
+  console.log("Server is running on port ", port);
 });

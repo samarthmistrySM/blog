@@ -1,9 +1,8 @@
 import React from "react";
 import { format } from "date-fns";
 
-const Modal = ({  isOpen, onClose, blog }) => {
+const Modal = ({ isOpen, onClose, blog }) => {
   // const [isLoading, setIsLoading] = useState(true)
-
 
   if (!isOpen) return null;
   const formattedDate = format(new Date(blog.date), "MMMM dd, yyyy");
@@ -11,7 +10,6 @@ const Modal = ({  isOpen, onClose, blog }) => {
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="modal-overlay fixed inset-0 bg-black opacity-50"></div>
       <div className="modal-container bg-white dark:bg-gray-800 w-3/4 mx-auto rounded shadow-lg z-50 overflow-y-auto">
-     (
         <div className="modal-content py-4 text-left px-6 text-gray-900 dark:text-white">
           <div className="modal-content py-4 text-left px-6 text-gray-900 dark:text-white">
             <h2 className="text-xl font-bold ">{blog.title}</h2>
@@ -34,7 +32,7 @@ const Modal = ({  isOpen, onClose, blog }) => {
                   {blog.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="dark:bg-gray-200 bg-blue-600 rounded-full px-2 py-1 text-sm dark:text-gray-900 text-white"
+                      className="dark:bg-gray-200 bg-blue-700 rounded-full px-2 py-1 text-sm dark:text-gray-900 text-white"
                     >
                       {tag}
                     </span>
@@ -50,7 +48,6 @@ const Modal = ({  isOpen, onClose, blog }) => {
             </button>
           </div>
         </div>
-        )
       </div>
     </div>
   );
