@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import About from './components/About';
 import Home from './components/Home';
 import Navigationbar from './components/Navigationbar';
@@ -32,23 +31,23 @@ function App() {
           <Route path='/' element={isLoggedIn ? <Navigate to='/home' /> : <Login onLogin={handleLogin} />} />
         </Routes>
 
-        {/* <div className="container dark:bg-gray-800 bg-gray-400">
+        <div className="container dark:bg-gray-800 bg-gray-400">
           <Routes>
             <Route path='/home' element={isLoggedIn ? <Home /> : <Navigate to='/' />  } />
             <Route path='/about' element={isLoggedIn ? <About /> : <Navigate to='/' />} />
             <Route path='/services' element={isLoggedIn ? <Services /> : <Navigate to='/' />} />
             <Route path='/contact' element={isLoggedIn ? <Contact /> : <Navigate to='/' />} />
           </Routes>
-        </div> */}
+        </div>
 
-<div className="container dark:bg-gray-800 bg-gray-400">
+{/* <div className="container dark:bg-gray-800 bg-gray-400">
           <Routes>
             <Route path='/home' element={ <Home />   } />
             <Route path='/about' element={ <About /> }/>
             <Route path='/services' element={<Services />} />
             <Route path='/contact' element={<Contact /> }/>
           </Routes>
-        </div>
+        </div> */}
         <Footer />
       </Router>
     </>

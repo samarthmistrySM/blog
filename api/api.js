@@ -50,13 +50,27 @@ app.get("/api/blogs", (req, res) => {
 });
 
 app.post("/api/contact", (req, res) => {
-  console.log(req.body);
+  
   try {
-    Contact.create(req.body);
+    res.send(req.body);
+    const result = Contact.create(req.body);
+    console.log(result);
   } catch (error) {
     console.log(error);
   }
 });
+
+app.post("/api/blogs",(req,res)=>{
+  console.log(req.body);
+  try{
+    res.send(req.body);
+    Blog.create(req.body);
+  }
+  catch(error){
+    console.log(error);
+    res.send(error);
+  }
+})
 
 app.listen(port, () => {
   console.log("Server is running on port ", port);

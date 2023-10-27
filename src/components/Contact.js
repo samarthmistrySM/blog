@@ -16,17 +16,19 @@ export default function Contact() {
 
 
 
-  const handlesubmit=(event)=>{
+  const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:4000/api/contact",formData)
-    .then((response)=>{
-        console.log(response.data)
+    axios
+      .post("http://localhost:4000/api/contact", formData)
+      .then((response) => {
+        console.log(response.data);
         console.log(formData);
-    })
-    .catch(error=>{
+      })
+      .catch((error) => {
         console.log(error);
-    })
-}
+      });
+  };
+  
 
   return (
     <>
@@ -90,7 +92,7 @@ export default function Contact() {
               ></textarea>
             </div>
             <button
-              type="submit" onClick={handlesubmit}
+              type="submit" onClick={handleSubmit}
               className="text-gray-900 bg-gray-400 hover:bg-gray-300  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-700"
             >
               Send message
