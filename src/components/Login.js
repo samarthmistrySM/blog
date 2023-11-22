@@ -1,33 +1,20 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
-const Login = ({ onLogin,setUserData }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  
+const Login = ({ onLogin }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(username, password);
   };
 
-  const url = "http://localhost:4000";
-  useEffect(()=>{
-    fetch(url + "/api/users")
-    .then((response)=>response.json())
-    .then((data)=>{
-      setUserData(data);
-      // console.log(data);
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-  },[])
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center text-gray-500 dark:text-gray-400 dark:bg-gray-800 bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl text-gray-500 dark:text-gray-400 font-extrabold ">
             Log in to your account
           </h2>
         </div>
@@ -44,7 +31,7 @@ const Login = ({ onLogin,setUserData }) => {
                 type="text"
                 autoComplete="username"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className=" bg-gray-50 dark:bg-gray-700 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 dark:text-white text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -60,7 +47,7 @@ const Login = ({ onLogin,setUserData }) => {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="bg-gray-50 dark:bg-gray-700 dark:text-white text-gray-900  appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500  rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -75,6 +62,15 @@ const Login = ({ onLogin,setUserData }) => {
             >
               Log In
             </button>
+          </div>
+          <div className="flex justify-between">
+            <span>Dont have Account?</span>
+            <NavLink
+              to="/register"
+              className="text-pink-500 underline decoration-sky-500"
+            >
+              Register!
+            </NavLink>
           </div>
         </form>
       </div>
