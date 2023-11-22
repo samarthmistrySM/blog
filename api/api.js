@@ -5,6 +5,7 @@ const morgan = require("morgan");
 
 const Blog = require("./models/Blog");
 const Contact = require("./models/Contact");
+const Auth = require("./models/Auth")
 
 const app = express();
 const port = 4000;
@@ -49,28 +50,52 @@ app.get("/api/blogs", (req, res) => {
     });
 });
 
-app.post("/api/contact", (req, res) => {
+
+app.get("/api/users", (req, res) => {
+  Auth.find({})
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+app.post("/api/contact", async(req, res) => {
   
   try {
     res.send(req.body);
-    const result = Contact.create(req.body);
-    console.log(result);
+    const result = await Contact.create(req.body);
+    res.send(result);
   } catch (error) {
     console.log(error);
   }
 });
 
-app.post("/api/blogs",(req,res)=>{
+app.post("/api/blogs",async(req,res)=>{
   console.log(req.body);
   try{
-    res.send(req.body);
-    Blog.create(req.body);
+    const postblog = await Blog.create(req.body);
+    res.send(postblog);
   }
   catch(error){
     console.log(error);
     res.send(error);
   }
 })
+
+app.post("/api/users",async(req,res)=>{
+  console.log(req.body);
+  try{
+    const user = await Auth.create(req.body);
+    res.send(user);
+  }
+  catch(error){
+    console.log(error);
+    res.send(error);
+  }
+})
+
 
 app.listen(port, () => {
   console.log("Server is running on port ", port);

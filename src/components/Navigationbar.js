@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import image from '../logo.png'
 import { NavLink } from "react-router-dom";
 
-export default function Navigationbar() {
+export default function Navigationbar({setIsLoggedIn}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [theme, setTheme] = useState("light");
 
@@ -16,6 +16,7 @@ export default function Navigationbar() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+
   }, [theme]);
 
   const HandlethemeSwitch = () => {
@@ -28,7 +29,7 @@ export default function Navigationbar() {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <NavLink to="/home" className="flex items-center">
             {/* <img className='w-[45px] h-[45px]   mr-3 ring-2 ring-blue-400  rounded-full'  src={image} alt="" /> */}
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="blog__logo self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Blogbites
             </span>
           </NavLink>

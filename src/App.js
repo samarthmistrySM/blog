@@ -7,31 +7,79 @@ import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import Register from './components/Register';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData,setUserData] = useState([]);
 
   
   const handleLogin = (username, password) => {
-    if(username ==="sam" && password === "sam") {
-      setIsLoggedIn(true);
-    }
+    const USER =userData.find(user => user.username === username)
+    if(USER){
+      if(USER.password=== password){
+        setIsLoggedIn(true);
+        console.log('toast init')
+        toast.success('🦄 Welcome to the FAM bitch!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+      }
+     }
     else{
-      alert("username or password is incorrect");
+     
+      toast.error('🦄 Username or password is incorrect!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+   
       setIsLoggedIn(false);
     }
   };
 
+  const handleRegister = (username,password)=>{
+    console.log({username,password})
+  }
+
   return (
     <>
       <Router>
-        <Navigationbar />
+        <Navigationbar setIsLoggedIn = {setIsLoggedIn} />
 
         <Routes>
-          <Route path='/' element={isLoggedIn ? <Navigate to='/home' /> : <Login onLogin={handleLogin} />} />
+          <Route path='/' element={isLoggedIn ? <Navigate to='/home' /> : <Login onLogin={handleLogin} setUserData={setUserData} />} />
+          <Route path='/register' element={<Register onRegister={handleRegister} />}/>
         </Routes>
 
-        <div className="container dark:bg-gray-800 bg-gray-400">
+        <div className="dark:bg-gray-800 bg-gray-400">
+        <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+{/* Same as */}
+<ToastContainer />
           <Routes>
             <Route path='/home' element={isLoggedIn ? <Home /> : <Navigate to='/' />  } />
             <Route path='/about' element={isLoggedIn ? <About /> : <Navigate to='/' />} />
@@ -40,14 +88,7 @@ function App() {
           </Routes>
         </div>
 
-{/* <div className="container dark:bg-gray-800 bg-gray-400">
-          <Routes>
-            <Route path='/home' element={ <Home />   } />
-            <Route path='/about' element={ <About /> }/>
-            <Route path='/services' element={<Services />} />
-            <Route path='/contact' element={<Contact /> }/>
-          </Routes>
-        </div> */}
+
         <Footer />
       </Router>
     </>

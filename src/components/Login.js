@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin,setUserData }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(username, password);
   };
+
+  const url = "http://localhost:4000";
+  useEffect(()=>{
+    fetch(url + "/api/users")
+    .then((response)=>response.json())
+    .then((data)=>{
+      setUserData(data);
+      // console.log(data);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  },[])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
