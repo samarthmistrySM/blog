@@ -24,7 +24,7 @@ export default function Services() {
     console.log(isPostOpen)
   }
 
-  const url = "http://localhost:4000";
+  const url = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetch(url + "/api/blogs")

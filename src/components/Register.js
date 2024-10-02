@@ -8,7 +8,7 @@ const Register = ({setUserData,userData}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const url = "http://localhost:4000";
+  const url = process.env.REACT_APP_API_URL;
 
   const userPresent = (username)=>{
     return userData.some(user => user.username === username)

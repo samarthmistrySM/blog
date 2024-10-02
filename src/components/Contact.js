@@ -19,7 +19,7 @@ export default function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:4000/api/contact", formData)
+      .post(`${process.env.REACT_APP_API_URL}/api/contact`, formData)
       .then((response) => {
         console.log(response.data);
         console.log(formData);

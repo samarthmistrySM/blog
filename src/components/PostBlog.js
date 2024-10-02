@@ -38,7 +38,7 @@ export default function PostBlog({ isOpen, onClose, setCount }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:4000/api/blogs", formData)
+      .post(`${process.env.REACT_APP_API_URL}/api/blogs`, formData)
       .then((response) => {
         console.log(response.data);
         setCount(count=>count+1);
