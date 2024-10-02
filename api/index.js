@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const cors = require("cors")
 
 //models
 const Blog = require("./models/Blog");
@@ -14,6 +15,7 @@ const app = express();
 const port = 4000;
 
 //middlewares
+app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
