@@ -11,9 +11,11 @@ export default function Services() {
   const [isPostOpen, setIsPostOpen] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState({});
   const [isLoading, setIsLoading] = useState(true); 
+  const [count, setCount] = useState(0);
 
   const handleReadMoreClick = (blog) => {
     setSelectedBlog(blog);
+    
     setIsModalOpen(true);
   };
 
@@ -29,31 +31,13 @@ export default function Services() {
       .then((response) => response.json())
       .then((data) => {
         setBlogData(data);
-        setIsLoading(false); // Set loading to false when data is loaded
+        setIsLoading(false); 
       })
       .catch((error) => {
         console.error(error);
-        setIsLoading(false); // Set loading to false in case of an error
+        setIsLoading(false); 
       });
-  }, []);
-
-  useEffect(() => {
-    gsap.from(".blog-card", {
-      opacity: 0,
-      y: -20,
-      stagger: 0.2,
-      duration: 1,
-      ease: "power3.inOut",
-    });
-    
-    gsap.to(".blog-card", {
-      opacity: 1,
-      y: 0,
-      stagger: 0.2,
-      duration: 1,
-      ease: "power3.inOut",
-    });
-  }, [BlogData]);
+  }, [count]);
 
   return (
     <>
@@ -83,6 +67,7 @@ export default function Services() {
       <PostBlog 
         isOpen={isPostOpen}
         onClose ={()=>setIsPostOpen(false)}
+        setCount={setCount}
       />
 
       <Modal

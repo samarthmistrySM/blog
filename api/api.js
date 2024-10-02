@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 });
 
 //mongodb connection
-mongoose.connect("mongodb+srv://sam:sam@blog.iw2ikgr.mongodb.net/myblogs", {
+mongoose.connect("mongodb+srv://sam:sam@cluster0.fgzbul2.mongodb.net/myblogs", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
